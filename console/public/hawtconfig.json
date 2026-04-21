@@ -1,0 +1,45 @@
+{
+  "branding": {
+    "appName": "Hawtio Custom Console",
+    "showAppName": true,
+    "appLogoUrl": "branding/Logo-RedHat-A-Standard-RGB.png",
+    "companyLogoUrl": "img/hawtio-logo.svg",
+    "css": "branding/app.css",
+    "favicon": "branding/favicon.ico"
+  },
+  "login": {
+    "description": "Login page for Hawtio Custom Console.",
+    "links": [
+      {
+        "url": "#terms",
+        "text": "Terms of use"
+      },
+      {
+        "url": "#help",
+        "text": "Help"
+      },
+      {
+        "url": "#privacy",
+        "text": "Privacy policy"
+      }
+    ]
+  },
+  "about": {
+    "title": "Hawtio Custom Console",
+    "description": "About page for Hawtio Custom Console.",
+    "productInfo": [
+      {
+        "name": "Hawtio Custom Console",
+        "value": "__PACKAGE_VERSION_PLACEHOLDER__"
+      },
+      {
+        "name": "Hawtio Sample Plugin",
+        "value": "__PACKAGE_VERSION_PLACEHOLDER__"
+      }
+    ],
+    "additionalInfo": "",
+    "copyright": "",
+    "imgSrc": "branding/Logo-RedHat-A-Standard-RGB.png"
+  },
+  "disabledRoutes": []
+}

@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>io.hawt.examples</groupId>
+  <artifactId>hawtio-sample-custom-console</artifactId>
+  <version>5.0.0</version>
+  <name>Hawtio Sample Custom Console</name>
+  <packaging>war</packaging>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.release>17</maven.compiler.release>
+
+    <finalName>sample-custom-console</finalName>
+
+    <!-- Versions -->
+    <hawtio-version>5.1.0</hawtio-version>
+    <servlet-api-version>5.0.0</servlet-api-version>
+    <slf4j-version>2.0.17</slf4j-version>
+    <log4j2-version>2.25.4</log4j2-version>
+    <node-version>v20.16.0</node-version>
+    <yarn-version>v1.22.22</yarn-version>
+    <frontend-maven-plugin-version>2.0.0</frontend-maven-plugin-version>
+    <jetty-version>12.1.7</jetty-version>
+
+    <!-- Path to the Hawtio TypeScript plugin -->
+    <console.path>console</console.path>
+  </properties>
+
+  <dependencies>
+    <!-- Servlet API is provided by the container -->
+    <dependency>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>${servlet-api-version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Mandatory core Hawtio modules -->
+    <dependency>
+      <groupId>io.hawt</groupId>
+      <artifactId>hawtio-system</artifactId>
+      <version>${hawtio-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.hawt</groupId>
+      <artifactId>hawtio-plugin-mbean</artifactId>
+      <version>${hawtio-version}</version>
+    </dependency>
+
+    <!-- Logging -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j2-impl</artifactId>
+      <version>${log4j2-version}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>${finalName}</finalName>
+
+    <plugins>
+      <!-- Build the plugin TypeScript subproject from Maven -->
+      <plugin>
+        <groupId>com.github.eirslett</groupId>
+        <artifactId>frontend-maven-plugin</artifactId>
+        <version>${frontend-maven-plugin-version}</version>
+        <configuration>
+          <workingDirectory>${console.path}</workingDirectory>
+        </configuration>
+        <executions>
+          <execution>
+            <id>install node and yarn</id>
+            <goals>
+              <goal>install-node-and-yarn</goal>
+            </goals>
+            <configuration>
+              <nodeVersion>${node-version}</nodeVersion>
+              <yarnVersion>${yarn-version}</yarnVersion>
+            </configuration>
+          </execution>
+          <execution>
+            <id>yarn install</id>
+            <goals>
+              <goal>yarn</goal>
+            </goals>
+            <configuration>
+              <arguments>install</arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>yarn build</id>
+            <goals>
+              <goal>yarn</goal>
+            </goals>
+            <configuration>
+              <arguments>build</arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>yarn replace-version</id>
+            <goals>
+              <goal>yarn</goal>
+            </goals>
+            <configuration>
+              <arguments>replace-version</arguments>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.3.2</version>
+        <configuration>
+          <webResources>
+            <!-- Add the plugin build to web resources -->
+            <resource>
+              <directory>${console.path}/build</directory>
+              <includes>
+                <include>**/*.*</include>
+              </includes>
+            </resource>
+          </webResources>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.5.0</version>
+        <executions>
+          <execution>
+            <id>copy</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>io.hawt</groupId>
+                  <artifactId>hawtio-war-minimal</artifactId>
+                  <version>${hawtio-version}</version>
+                  <type>war</type>
+                  <outputDirectory>${project.build.directory}/deploy</outputDirectory>
+                  <destFileName>hawtio.war</destFileName>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.eclipse.jetty.ee10</groupId>
+        <artifactId>jetty-ee10-maven-plugin</artifactId>
+        <version>${jetty-version}</version>
+        <configuration>
+          <deployMode>EMBED</deployMode>
+          <scan>10</scan>
+          <webApp>
+            <contextPath>/hawtio</contextPath>
+            <resourceBases>
+              <resourceBase>src/main/webapp</resourceBase>
+              <resourceBases>${console.path}/build</resourceBases>
+            </resourceBases>
+          </webApp>
+          <!--
+          <contextHandlers>
+            <contextHandler implementation="org.eclipse.jetty.ee10.maven.plugin.MavenWebAppContext">
+              <war>${project.build.directory}/deploy/hawtio.war</war>
+              <contextPath>/hawtio</contextPath>
+            </contextHandler>
+          </contextHandlers>
+          -->
+          <modules>
+            <module>jmx</module>
+          </modules>
+          <systemProperties>
+            <hawtio.authenticationEnabled>false</hawtio.authenticationEnabled>
+            <hawtio.disableProxy>true</hawtio.disableProxy>
+          </systemProperties>
+        </configuration>
+      </plugin>
+
+      <!-- Clean up the plugin's 'build/' and 'node_modules/' directories as well -->
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>${basedir}/${console.path}/build</directory>
+              <includes>
+                <include>**/*</include>
+              </includes>
+              <followSymlinks>false</followSymlinks>
+            </fileset>
+            <fileset>
+              <directory>${basedir}/${console.path}/node_modules</directory>
+              <includes>
+                <include>**/*</include>
+              </includes>
+              <followSymlinks>false</followSymlinks>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
