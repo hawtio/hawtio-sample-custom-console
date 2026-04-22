@@ -135,33 +135,6 @@
       </plugin>
 
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <version>3.5.0</version>
-        <executions>
-          <execution>
-            <id>copy</id>
-            <phase>test-compile</phase>
-            <goals>
-              <goal>copy</goal>
-            </goals>
-            <configuration>
-              <artifactItems>
-                <artifactItem>
-                  <groupId>io.hawt</groupId>
-                  <artifactId>hawtio-war-minimal</artifactId>
-                  <version>${hawtio-version}</version>
-                  <type>war</type>
-                  <outputDirectory>${project.build.directory}/deploy</outputDirectory>
-                  <destFileName>hawtio.war</destFileName>
-                </artifactItem>
-              </artifactItems>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
         <groupId>org.eclipse.jetty.ee10</groupId>
         <artifactId>jetty-ee10-maven-plugin</artifactId>
         <version>${jetty-version}</version>

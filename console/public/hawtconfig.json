@@ -2,10 +2,10 @@
   "branding": {
     "appName": "Hawtio Custom Console",
     "showAppName": true,
-    "appLogoUrl": "branding/Logo-RedHat-A-Standard-RGB.png",
+    "appLogoUrl": "static/branding/Logo-RedHat-A-Standard-RGB.png",
     "companyLogoUrl": "img/hawtio-logo.svg",
-    "css": "branding/app.css",
-    "favicon": "branding/favicon.ico"
+    "css": "static/branding/app.css",
+    "favicon": "static/branding/favicon.ico"
   },
   "login": {
     "description": "Login page for Hawtio Custom Console.",
@@ -39,7 +39,7 @@
     ],
     "additionalInfo": "",
     "copyright": "",
-    "imgSrc": "branding/Logo-RedHat-A-Standard-RGB.png"
+    "imgSrc": "static/branding/Logo-RedHat-A-Standard-RGB.png"
   },
   "disabledRoutes": []
 }
