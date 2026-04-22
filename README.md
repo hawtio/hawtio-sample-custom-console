@@ -1,6 +1,6 @@
 # Hawtio Sample Custom Console
 
-[![Build](https://github.com/hawtio/hawtio-sample-custom-console/actions/workflows/build.yml/badge.svg)](https://github.com/hawtio/hawtio-sample-custom-console/actions/workflows/build.yml)
+[![Test](https://github.com/hawtio/hawtio-sample-custom-console/actions/workflows/test.yml/badge.svg)](https://github.com/hawtio/hawtio-sample-custom-console/actions/workflows/test.yml)
 
 This sample demonstrates how to create a custom console using [Hawtio v5](https://github.com/hawtio/hawtio) as a WAR file. A custom console is a console application that includes Hawtio's built-in plugins (JMX, Camel, etc.) along with your own custom plugins. It can be deployed to application servers such as Jetty, WildFly, and Tomcat.
 

@@ -1,16 +1,14 @@
-name: Build
+name: Test
 
 on:
   pull_request_target:
     branches:
-      - hawtio-5.x
-      - hawtio-4.x
+      - main
     paths-ignore:
       - '**.md'
   push:
     branches:
-      - hawtio-5.x
-      - hawtio-4.x
+      - main
     paths-ignore:
       - '**.md'
 
@@ -20,12 +18,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        java: ['17', '21']
+        java: ['21']
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
       - name: Set up Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
           java-version: ${{ matrix.java }}
