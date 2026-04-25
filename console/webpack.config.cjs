@@ -1,4 +1,5 @@
 const { ModuleFederationPlugin } = require('webpack').container
+const { ProvidePlugin, NormalModuleReplacementPlugin } = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
@@ -84,6 +85,17 @@ module.exports = (_, args) => {
           languages: ['xml', 'json', 'html'],
           globalAPI: true,
         }),
+        // Plugins required to polyfill Node modules for @hawtio/ai-plugin / langchain
+        new ProvidePlugin({
+          process: 'process/browser',
+          Buffer: ['buffer', 'Buffer'],
+        }),
+        new NormalModuleReplacementPlugin(
+          /^node:/,
+          (resource) => {
+            resource.request = resource.request.replace(/^node:/, '')
+          }
+        ),
       ],
       output: {
         clean: true,
@@ -137,6 +149,19 @@ module.exports = (_, args) => {
         symlinks: false,
         alias: {
           '@thumbmarkjs/thumbmarkjs': path.join(__dirname, './node_modules/@thumbmarkjs/thumbmarkjs/dist/thumbmark.esm.js'),
+          // Required to polyfill Node modules for @hawtio/ai-plugin / langchain
+          "node:fs/promises": false,
+          "node:fs": false,
+          "node:path": require.resolve("path-browserify"),
+          "node:process": "process/browser",
+        },
+        // Required to polyfill Node modules for @hawtio/ai-plugin / langchain
+        fallback: {
+          "path": require.resolve("path-browserify"),
+          "process": require.resolve("process/browser"),
+          "url": require.resolve("url/"),
+          "buffer": require.resolve("buffer/"),
+          "fs": false,
         },
       },
       ignoreWarnings: [

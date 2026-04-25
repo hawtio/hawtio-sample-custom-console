@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
+import { plugin as aiPlugin } from '@hawtio/ai-plugin'
 import { configManager, hawtio, HawtioInitialization, Logger, TaskState } from '@hawtio/react/init'
 import { plugin } from './sample-plugin'
 
@@ -22,6 +23,9 @@ import('@hawtio/react').then(async ({ Logger, hawtio, connect, rbac, jmx }) => {
   connect()
   rbac()
   jmx()
+
+  // Example external plugin
+  aiPlugin()
 
   // Register a custom plugin
   plugin()

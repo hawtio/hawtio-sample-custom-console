@@ -21,7 +21,7 @@
     <servlet-api-version>5.0.0</servlet-api-version>
     <slf4j-version>2.0.17</slf4j-version>
     <log4j2-version>2.25.4</log4j2-version>
-    <node-version>v20.16.0</node-version>
+    <node-version>v24.14.1</node-version>
     <yarn-version>v1.22.22</yarn-version>
     <frontend-maven-plugin-version>2.0.0</frontend-maven-plugin-version>
     <jetty-version>12.1.7</jetty-version>
@@ -162,6 +162,9 @@
           <systemProperties>
             <hawtio.authenticationEnabled>false</hawtio.authenticationEnabled>
             <hawtio.disableProxy>true</hawtio.disableProxy>
+            <hawtio.http.csp.connectSrc>
+              https://generativelanguage.googleapis.com
+            </hawtio.http.csp.connectSrc>
           </systemProperties>
         </configuration>
       </plugin>
