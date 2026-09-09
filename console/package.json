@@ -12,8 +12,8 @@
     "replace-version": "replace __PACKAGE_VERSION_PLACEHOLDER__ $npm_package_version ./build/hawtconfig.json"
   },
   "dependencies": {
-    "@hawtio/ai-plugin": "^0.1.1",
-    "@hawtio/react": "^2.1.0",
+    "@hawtio/ai-plugin": "^0.2.2",
+    "@hawtio/react": "^2.3.0",
     "@patternfly/react-charts": "^8.4.0",
     "@patternfly/react-code-editor": "^6.4.0",
     "@patternfly/react-core": "^6.4.0",
@@ -24,11 +24,11 @@
     "monaco-editor": "~0.52.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.30.3"
+    "react-router": "^7.18.2"
   },
   "devDependencies": {
-    "@hawtio/backend-middleware": "^1.0.8",
-    "@swc/core": "^1.15.21",
+    "@hawtio/backend-middleware": "^1.1.0",
+    "@swc/core": "^1.16.1",
     "@types/path-browserify": "^1",
     "@types/react": "^18.3.23",
     "@types/react-dom": "^18.3.7",
@@ -36,9 +36,9 @@
     "body-parser": "^2.2.2",
     "buffer": "^6.0.3",
     "copy-webpack-plugin": "^14.0.0",
-    "css-loader": "^7.1.4",
-    "html-webpack-plugin": "^5.6.6",
-    "jest": "^30.3.0",
+    "css-loader": "^7.1.5",
+    "html-webpack-plugin": "^5.6.8",
+    "jest": "^30.5.1",
     "monaco-editor-webpack-plugin": "^7.1.1",
     "path-browserify": "^1.0.1",
     "process": "^0.11.10",
@@ -49,7 +49,7 @@
     "url": "^0.11.4",
     "webpack": "^5.105.4",
     "webpack-cli": "^7.0.2",
-    "webpack-dev-server": "^5.2.3"
+    "webpack-dev-server": "^5.2.6"
   },
   "resolutions": {
     "@module-federation/utilities": "3.1.83"
@@ -66,5 +66,5 @@
       "last 1 safari version"
     ]
   },
-  "packageManager": "yarn@4.14.1"
+  "packageManager": "yarn@4.18.0"
 }

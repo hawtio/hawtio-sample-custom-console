@@ -45,9 +45,9 @@ module.exports = (_, args) => {
               singleton: true,
               requiredVersion: dependencies['react-dom'],
             },
-            'react-router-dom': {
+            'react-router': {
               singleton: true,
-              requiredVersion: dependencies['react-router-dom'],
+              requiredVersion: dependencies['react-router'],
             },
             '@hawtio/react': {
               singleton: true,
@@ -87,7 +87,7 @@ module.exports = (_, args) => {
         }),
         // Plugins required to polyfill Node modules for @hawtio/ai-plugin / langchain
         new ProvidePlugin({
-          process: 'process/browser',
+          process: require.resolve('process/browser.js'),
           Buffer: ['buffer', 'Buffer'],
         }),
         new NormalModuleReplacementPlugin(
@@ -153,7 +153,7 @@ module.exports = (_, args) => {
           "node:fs/promises": false,
           "node:fs": false,
           "node:path": require.resolve("path-browserify"),
-          "node:process": "process/browser",
+          "node:process": require.resolve("process/browser"),
         },
         // Required to polyfill Node modules for @hawtio/ai-plugin / langchain
         fallback: {

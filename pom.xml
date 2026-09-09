@@ -17,13 +17,13 @@
     <finalName>sample-custom-console</finalName>
 
     <!-- Versions -->
-    <hawtio-version>5.1.0</hawtio-version>
+    <hawtio-version>5.3.0</hawtio-version>
     <servlet-api-version>5.0.0</servlet-api-version>
     <slf4j-version>2.0.17</slf4j-version>
     <log4j2-version>2.25.4</log4j2-version>
-    <node-version>v24.14.1</node-version>
+    <node-version>v24.21.0</node-version>
     <yarn-version>v1.22.22</yarn-version>
-    <frontend-maven-plugin-version>2.0.0</frontend-maven-plugin-version>
+    <frontend-maven-plugin-version>2.0.2</frontend-maven-plugin-version>
     <jetty-version>12.1.7</jetty-version>
 
     <!-- Path to the Hawtio TypeScript plugin -->
