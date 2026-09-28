@@ -80,7 +80,7 @@ mvn install -Dskip.yarn
 
 ### Deploy
 
-Copy the built file `target/sample-plugin.war` to the deployment directory of the application server of your choice.
+Copy the built file `target/sample-custom-console.war` to the deployment directory of the application server of your choice.
 
 ### Test run
 
@@ -90,7 +90,7 @@ You can quickly run and test the application by using `jetty-maven-plugin` confi
 mvn jetty:run -Dskip.yarn
 ```
 
-You can access the custom console at: <http://localhost:8080/sample-plugin/>
+You can access the custom console at: <http://localhost:8080/hawtio/>
 
 ## Faster plugin development
 

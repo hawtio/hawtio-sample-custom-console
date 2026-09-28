@@ -145,7 +145,7 @@
             <contextPath>/hawtio</contextPath>
             <resourceBases>
               <resourceBase>src/main/webapp</resourceBase>
-              <resourceBases>${console.path}/build</resourceBases>
+              <resourceBase>${console.path}/build</resourceBase>
             </resourceBases>
           </webApp>
           <!--
@@ -163,6 +163,7 @@
             <hawtio.authenticationEnabled>false</hawtio.authenticationEnabled>
             <hawtio.disableProxy>true</hawtio.disableProxy>
             <hawtio.http.csp.connectSrc>
+              https://api.openai.com,
               https://generativelanguage.googleapis.com
             </hawtio.http.csp.connectSrc>
           </systemProperties>
