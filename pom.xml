@@ -164,6 +164,7 @@
             <hawtio.disableProxy>true</hawtio.disableProxy>
             <hawtio.http.csp.connectSrc>
               https://api.openai.com,
+              https://api.anthropic.com,
               https://generativelanguage.googleapis.com
             </hawtio.http.csp.connectSrc>
           </systemProperties>

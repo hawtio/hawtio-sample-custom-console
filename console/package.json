@@ -12,7 +12,7 @@
     "replace-version": "replace __PACKAGE_VERSION_PLACEHOLDER__ $npm_package_version ./build/hawtconfig.json"
   },
   "dependencies": {
-    "@hawtio/ai-plugin": "^0.3.0",
+    "@hawtio/ai-plugin": "^0.3.1",
     "@hawtio/react": "^2.3.0",
     "@patternfly/react-charts": "^8.4.0",
     "@patternfly/react-code-editor": "^6.4.0",
